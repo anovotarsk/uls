@@ -8,7 +8,9 @@ int mx_strcmp(const char *s1, const char *s2) {
             return s1[i] - s2[i];
         i++;
     }
-    if (s1[i] != s2[i])
+    if (mx_strlen(s1) > mx_strlen(s2))
+        return 1;
+    if (mx_strlen(s1) < mx_strlen(s2))
         return -1;
     return 0;
 }

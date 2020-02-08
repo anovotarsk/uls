@@ -22,24 +22,26 @@ char **mx_arr_of_files(char **argv) {
     return files;
 }
 
-void mx_dir_or_error(char *dir) {
+void mx_dir_or_error(char **dirs, int i, t_flags *flags) {
     char *str;
     char **files_in_dir;
 
-    mx_printstr(dir);
-    mx_printstr(":\n");
-    if (mx_dirlen(dir) < 0) {
-        str = mx_strcat("uls: ", dir);
+    if (mx_strcmp(dirs[0], ".") != 0 || dirs[1] != NULL) {
+        mx_printstr(dirs[i]);
+        mx_printstr(":\n");
+    }
+    if (mx_dirlen(dirs[i]) < 0) {
+        str = mx_strcat("uls: ", dirs[i]);
         perror(str);
         mx_strdel(&str);
         return;
     }
-    files_in_dir = mx_dir_to_matrix(dir);
+    files_in_dir = mx_dir_to_matrix(dirs[i], flags);
     mx_print_strarr(files_in_dir, " "); //допілити функцію прінта
     mx_del_strarr(&files_in_dir);
 }
 
-void mx_start_printing(char **argv) {
+void mx_start_printing(char **argv, t_flags *flags) {
     char **files = mx_arr_of_files(argv);
     int i;
     bool was_out = false;
@@ -57,7 +59,7 @@ void mx_start_printing(char **argv) {
         if (mx_dirlen(argv[i]) != -1 && errno != 2) {
             if (was_out++)
                 mx_printchar('\n');
-            mx_dir_or_error(argv[i]);//допілити функцію прінта директоії
+            mx_dir_or_error(argv, i, flags);//допілити функцію прінта директоії
         }
     }
 }

@@ -10,6 +10,14 @@ int mx_arr_size(char **arr) {
     return size;
 }
 
+static char **no_dirs() {
+    char **arr = (char**)malloc(sizeof(char*) * 2);
+
+    arr[0] = mx_strdup(".");
+    arr[1] = NULL;
+    return arr;
+}
+
 static char **list_to_arr(t_dirs *list) {
     int len = 0;
     char **arr;
@@ -21,7 +29,7 @@ static char **list_to_arr(t_dirs *list) {
         list = list->next;
     }
     if (len == 0)
-        return NULL;
+        return no_dirs();
     arr = (char**)malloc(sizeof(char*) * (len + 1));
     for (i = 0; i < len; i++) {
         arr[i] = l->dir;

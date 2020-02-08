@@ -47,3 +47,12 @@ void mx_push_flag(t_flags **list, char data) {
         l->next = node;
     }
 }
+
+bool mx_flag_search(char f, t_flags *flags) {
+    while (flags != NULL) {
+        if (f == flags->flag)
+            return true;
+        flags = flags->next;
+    }
+    return false;
+}

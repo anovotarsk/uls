@@ -15,19 +15,16 @@ int mx_dirlen(char *dir) {
     return len;
 }
 
-char **mx_dir_to_matrix(char *dir) {
+char **mx_dir_to_matrix(char *dir, t_flags *flags) {
     DIR *dd = opendir(dir);
     int len = mx_dirlen(dir);
     struct dirent *entry;
     char **arr = (char**)malloc(sizeof(char*) * (len + 1));
     int i = 0;
 
-    if (len < 0) {
-        free(arr);
-        return NULL; // error
-    }
-    for (i = 0; (entry = readdir(dd)) != NULL; i++) {
-        arr[i] = mx_strdup(entry->d_name);
+    for (i = 0; (entry = readdir(dd)) != NULL;) {
+        if (mx_flag_search('a', flags) || *(entry->d_name) != '.')
+            arr[i++] = mx_strdup(entry->d_name);
     }
     arr[i] = NULL;
     closedir(dd);
