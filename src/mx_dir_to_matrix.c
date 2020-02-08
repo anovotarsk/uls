@@ -25,6 +25,11 @@ char **mx_dir_to_matrix(char *dir, t_flags *flags) {
     for (i = 0; (entry = readdir(dd)) != NULL;) {
         if (mx_flag_search('a', flags) || *(entry->d_name) != '.')
             arr[i++] = mx_strdup(entry->d_name);
+        else
+            if (mx_flag_search('A', flags)
+                && mx_strcmp(entry->d_name, ".") != 0
+                && (entry->d_name)[1] != '.')
+                arr[i++] = mx_strdup(entry->d_name);
     }
     arr[i] = NULL;
     closedir(dd);
