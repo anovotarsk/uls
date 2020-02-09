@@ -26,7 +26,7 @@ void mx_dir_or_error(char **dirs, int i, t_flags *flags) {
     char *str;
     char **files_in_dir;
 
-    if (mx_strcmp(dirs[0], ".") != 0 || dirs[1] != NULL) {
+    if ((mx_strcmp(dirs[0], ".") != 0 || dirs[1] != NULL) && mx_arr_size(dirs) > 1) {
         mx_printstr(dirs[i]);
         mx_printstr(":\n");
     }
@@ -37,7 +37,8 @@ void mx_dir_or_error(char **dirs, int i, t_flags *flags) {
         return;
     }
     files_in_dir = mx_dir_to_matrix(dirs[i], flags);
-    mx_print_strarr(files_in_dir, " "); //допілити функцію прінта
+    //mx_print_strarr(files_in_dir, " "); //допілити функцію прінта
+    mx_ulsprint(files_in_dir);
     mx_del_strarr(&files_in_dir);
 }
 
@@ -46,7 +47,8 @@ void mx_start_printing(char **argv, t_flags *flags) {
     int i;
     bool was_out = false;
 
-    mx_print_strarr(files, " "); //допілити функцію прінта
+    //mx_print_strarr(files, " "); //допілити функцію прінта
+    mx_ulsprint(files);
     if (files[0] != NULL)
         was_out = true;
     if (mx_arr_size(files) == mx_arr_size(argv)) {

@@ -7,7 +7,7 @@
 #include <errno.h>
 #include <string.h>
 #include <sys/types.h>
-
+#include <sys/ioctl.h>
 
 //structs
 typedef struct s_dirs {
@@ -36,5 +36,6 @@ char **mx_check_arguments(t_dirs *list);
 int mx_arr_size(char **arr);
 char **mx_arr_of_files(char **argv);
 void mx_start_printing(char **argv, t_flags *flags);
+void mx_ulsprint(char **files);
 
 #endif

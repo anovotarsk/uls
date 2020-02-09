@@ -48,6 +48,7 @@ char **mx_check_arguments(t_dirs *list) {
     int i;
 
     for (i = 0; i < len; i++) {
+        errno = 0;
         mx_dirlen(arr[i]);
         if (errno == 2) {
             str = mx_strcat("uls: ", arr[i]);
