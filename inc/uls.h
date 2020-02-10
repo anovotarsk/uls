@@ -8,6 +8,7 @@
 #include <string.h>
 #include <sys/types.h>
 #include <sys/ioctl.h>
+#include <sys/acl.h>
 
 //structs
 typedef struct s_dirs {

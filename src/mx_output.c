@@ -37,7 +37,6 @@ void mx_dir_or_error(char **dirs, int i, t_flags *flags) {
         return;
     }
     files_in_dir = mx_dir_to_matrix(dirs[i], flags);
-    //mx_print_strarr(files_in_dir, " "); //допілити функцію прінта
     mx_ulsprint(files_in_dir);
     mx_del_strarr(&files_in_dir);
 }
@@ -47,7 +46,6 @@ void mx_start_printing(char **argv, t_flags *flags) {
     int i;
     bool was_out = false;
 
-    //mx_print_strarr(files, " "); //допілити функцію прінта
     mx_ulsprint(files);
     if (files[0] != NULL)
         was_out = true;
@@ -61,7 +59,7 @@ void mx_start_printing(char **argv, t_flags *flags) {
         if (mx_dirlen(argv[i]) != -1 && errno != 2) {
             if (was_out++)
                 mx_printchar('\n');
-            mx_dir_or_error(argv, i, flags);//допілити функцію прінта директоії
+            mx_dir_or_error(argv, i, flags);
         }
     }
 }

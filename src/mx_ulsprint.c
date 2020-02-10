@@ -66,11 +66,11 @@ void static for_print(char **arr, int row, int colom, int space_size) {//Доп�
         for (j = 0; j < row && par < mx_arr_size(arr); j++) {
             mx_printstr(arr[par]);
             if (j + 1 != row && par + colom < mx_arr_size(arr)) {
-                if (mx_strlen(arr[par]) == 8)
+                if (mx_strlen(arr[par]) % 8 == 0)
                         space_size -= 8;
                 for (f = 0; f < ((space_size - mx_strlen(arr[par])) / 8) + 1; f++)
                     mx_printchar('\t');
-                if (mx_strlen(arr[par]) == 8)
+                if (mx_strlen(arr[par]) % 8 == 0)
                         space_size += 8;
             }
             par += colom;

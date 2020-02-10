@@ -1,10 +1,11 @@
 #include "../inc/uls.h"
 
 int mx_dirlen(char *dir) {
-    DIR *dd = opendir(dir);
+    DIR *dd;
     int len = 0;
     struct dirent *entry;
 
+    dd = opendir(dir);
     if (dd == NULL && errno == 20)
         return -1;
     if (dd == NULL)
