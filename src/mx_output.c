@@ -25,7 +25,7 @@ char **mx_arr_of_files(char **argv) {
 void mx_dir_or_error(char **dirs, int i, t_flags *flags) {
     char *str;
     char **files_in_dir;
-
+    
     if ((mx_strcmp(dirs[0], ".") != 0 || dirs[1] != NULL) && mx_arr_size(dirs) > 1) {
         mx_printstr(dirs[i]);
         mx_printstr(":\n");
