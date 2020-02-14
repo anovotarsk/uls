@@ -16,6 +16,13 @@ int mx_dirlen(char *dir) {
     return len;
 }
 
+void mx_flag_sort(char **arr, t_flags *flags) {
+    if (mx_flag_search('r', flags))
+        mx_bubble_sort_r(arr, mx_arr_size(arr));
+    else
+        mx_bubble_sort(arr, mx_arr_size(arr));
+}
+
 char **mx_dir_to_matrix(char *dir, t_flags *flags) {
     DIR *dd = opendir(dir);
     int len = mx_dirlen(dir);
@@ -34,6 +41,6 @@ char **mx_dir_to_matrix(char *dir, t_flags *flags) {
     }
     arr[i] = NULL;
     closedir(dd);
-    mx_bubble_sort(arr, mx_arr_size(arr));
+    mx_flag_sort(arr, flags);
     return arr;
 }

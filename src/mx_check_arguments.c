@@ -18,7 +18,7 @@ static char **no_dirs() {
     return arr;
 }
 
-static char **list_to_arr(t_dirs *list) {
+static char **list_to_arr(t_dirs *list, t_flags *flags) {
     int len = 0;
     char **arr;
     t_dirs *l = list;
@@ -36,14 +36,14 @@ static char **list_to_arr(t_dirs *list) {
         l = l->next;
     }
     arr[len] = NULL;
-    mx_bubble_sort(arr, len);
+    mx_flag_sort(arr, flags);
     return arr;
 }
 
 //сортирует и выводит ошибку о несуществующем файле
-char **mx_check_arguments(t_dirs *list) {
+char **mx_check_arguments(t_dirs *list, t_flags *flags) {
     char *str;
-    char **arr = list_to_arr(list);
+    char **arr = list_to_arr(list, flags);
     int len = mx_arr_size(arr);
     int i;
 

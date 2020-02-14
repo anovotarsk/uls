@@ -16,7 +16,7 @@ char **mx_arr_of_files(char **argv) {
     files[count_files] = NULL;
     for (i = 0; i < len; i++)
         if (mx_dirlen(argv[i]) == -1) {
-            files[j] = argv[i];
+            files[j] = mx_strdup(argv[i]);
             j++;
         }
     return files;
@@ -41,9 +41,25 @@ void mx_dir_or_error(char **dirs, int i, t_flags *flags) {
     mx_del_strarr(&files_in_dir);
 }
 
+static void R_or_default(char **argv, t_flags *flags, bool was_out) {
+    int i;
+
+    if (mx_flag_search('R', flags))
+        mx_uls_flag_R(argv, flags, was_out);
+    else {
+        for (i = 0; i < mx_arr_size(argv); i++) {
+            errno = 0;
+            if (mx_dirlen(argv[i]) != -1 && errno != 2) {
+                if (was_out++)
+                    mx_printchar('\n');
+                mx_dir_or_error(argv, i, flags);
+            }
+        }
+    }
+}
+
 void mx_start_printing(char **argv, t_flags *flags) {
     char **files = mx_arr_of_files(argv);
-    int i;
     bool was_out = false;
 
     mx_ulsprint(files);
@@ -54,12 +70,5 @@ void mx_start_printing(char **argv, t_flags *flags) {
         return;
     }
     mx_del_strarr(&files);
-    for (i = 0; i < mx_arr_size(argv); i++) {
-        errno = 0;
-        if (mx_dirlen(argv[i]) != -1 && errno != 2) {
-            if (was_out++)
-                mx_printchar('\n');
-            mx_dir_or_error(argv, i, flags);
-        }
-    }
+    R_or_default(argv, flags, was_out);
 }

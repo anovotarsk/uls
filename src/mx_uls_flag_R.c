@@ -21,7 +21,7 @@ static void mx_dir_or_error_R(char **dirs, int i, t_flags *flags, bool flag) {
     mx_del_strarr(&files_in_dir);
 }
 
-static char **print_and_create(char **argv, int i, t_flags *flags, bool flag) {
+static char **out_and_new(char **argv, int i, t_flags *flags, bool flag) {
     char **dir;
     char *help_v;
 
@@ -39,7 +39,7 @@ static char **print_and_create(char **argv, int i, t_flags *flags, bool flag) {
     return dir;
 }
 
-void mx_uls_flag_R(char **argv, t_flags *flags, int chek, bool flag) {
+void mx_uls_flag_R(char **argv, t_flags *flags, bool f) {
     int cheker;
     char **dir;
     struct stat file;
@@ -49,15 +49,15 @@ void mx_uls_flag_R(char **argv, t_flags *flags, int chek, bool flag) {
         lstat(argv[i], &file);
         if (S_IFLNK != (file.st_mode & S_IFMT) && mx_dirlen(argv[i]) != -1) {
             if (cheker != -2) {
-                if (chek++ != 0)
+                if (f)
                     mx_printchar('\n');
-                chek = 1;
-                dir = print_and_create(argv, i, flags, flag);
-                mx_uls_flag_R(dir, flags, chek, true);
+                dir = out_and_new(argv, i, flags, f || mx_arr_size(argv) > 1);
+                f = true;
+                mx_uls_flag_R(dir, flags, true);
                 mx_del_strarr(&dir);
             }
             else
-                mx_dir_or_error_R(argv, i, flags, flag);
+                mx_dir_or_error_R(argv, i, flags, f);
         }
     }
 }
