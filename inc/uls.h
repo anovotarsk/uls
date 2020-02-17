@@ -44,6 +44,7 @@ void mx_ulsprint(char **files);
 void mx_uls_chose_flag(char **arr, t_flags *flags);
 int mx_bubble_sort_r(char **arr, int size);
 void mx_flag_sort(char **arr, t_flags *flags);
+char * mx_permissions(struct stat file);
 
 #endif
 

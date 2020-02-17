@@ -7,7 +7,11 @@ int main(int argc, char **argv) {
 
     mx_file_flag_list(argc, argv, &dirs, &flags);
     arr = mx_check_arguments(dirs, flags);
+    struct stat file;
+    lstat(arr[0], &file);
+    char *root = mx_permissions(file);
+    mx_printstr(root);
     //mx_print_strarr(arr, " ");
-    mx_start_printing(arr, flags);
+    //mx_start_printing(arr, flags);
     //system("leaks -q uls");
 }
