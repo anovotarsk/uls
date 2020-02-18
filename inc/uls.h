@@ -10,6 +10,8 @@
 #include <sys/ioctl.h>
 #include <sys/acl.h>
 #include <sys/stat.h>
+#include <pwd.h>
+#include <grp.h>
 
 //structs
 typedef struct s_dirs {
@@ -45,6 +47,10 @@ void mx_uls_chose_flag(char **arr, t_flags *flags);
 int mx_bubble_sort_r(char **arr, int size);
 void mx_flag_sort(char **arr, t_flags *flags);
 char * mx_permissions(struct stat file);
+char *mx_count_links(struct stat file);
+char *mx_owner_name(struct stat file);
+char *mx_group_name(struct stat file);
+char *mx_file_size(struct stat file);
 
 #endif
 
