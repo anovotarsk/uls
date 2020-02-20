@@ -12,6 +12,10 @@
 #include <sys/stat.h>
 #include <pwd.h>
 #include <grp.h>
+#include <sys/xattr.h>
+#include <time.h>
+
+#define MX_HALF_YEAR 15724800
 
 //structs
 typedef struct s_dirs {
@@ -46,11 +50,17 @@ void mx_ulsprint(char **files);
 void mx_uls_chose_flag(char **arr, t_flags *flags);
 int mx_bubble_sort_r(char **arr, int size);
 void mx_flag_sort(char **arr, t_flags *flags);
-char * mx_permissions(struct stat file);
+void mx_owner_permissions(struct stat file, char **str);
+void mx_group_permissions(struct stat file, char **str);
+void mx_other_permissions(struct stat file, char **str);
+char * mx_permissions(char *f);
 char *mx_count_links(struct stat file);
 char *mx_owner_name(struct stat file);
 char *mx_group_name(struct stat file);
 char *mx_file_size(struct stat file);
+void mx_attr_or_acl(char *file, char **permissions);
+char *mx_time(struct stat file);
+char *mx_link(char *file);
 
 #endif
 

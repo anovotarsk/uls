@@ -20,78 +20,15 @@ static void type_of_file(struct stat file, char **str) {
     mx_strdel(&tmp);
 }
 
-static void owner_permissions(struct stat file, char **str) {
-    char *tmp = *str;
-
-    if ((file.st_mode & S_IRUSR) == S_IRUSR)
-        *str = mx_strcat(tmp, "r");
-    else
-        *str = mx_strcat(tmp, "-");
-    mx_strdel(&tmp);
-    tmp = *str;
-    if ((file.st_mode & S_IWUSR) == S_IWUSR)
-        *str = mx_strcat(tmp, "w");
-    else
-        *str = mx_strcat(tmp, "-");
-    mx_strdel(&tmp);
-    tmp = *str;
-    if ((file.st_mode & S_IXUSR) == S_IXUSR)
-        *str = mx_strcat(tmp, "x");
-    else
-        *str = mx_strcat(tmp, "-");
-    mx_strdel(&tmp);
-}
-
-static void group_permissions(struct stat file, char **str) {
-    char *tmp = *str;
-
-    if ((file.st_mode & S_IRGRP) == S_IRGRP)
-        *str = mx_strcat(tmp, "r");
-    else
-        *str = mx_strcat(tmp, "-");
-    mx_strdel(&tmp);
-    tmp = *str;
-    if ((file.st_mode & S_IWGRP) == S_IWGRP)
-        *str = mx_strcat(tmp, "w");
-    else
-        *str = mx_strcat(tmp, "-");
-    mx_strdel(&tmp);
-    tmp = *str;
-    if ((file.st_mode & S_IXGRP) == S_IXGRP)
-        *str = mx_strcat(tmp, "x");
-    else
-        *str = mx_strcat(tmp, "-");
-    mx_strdel(&tmp);
-}
-
-static void other_permissions(struct stat file, char **str) {
-    char *tmp = *str;
-
-    if ((file.st_mode & S_IROTH) == S_IROTH)
-        *str = mx_strcat(tmp, "r");
-    else
-        *str = mx_strcat(tmp, "-");
-    mx_strdel(&tmp);
-    tmp = *str;
-    if ((file.st_mode & S_IWOTH) == S_IWOTH)
-        *str = mx_strcat(tmp, "w");
-    else
-        *str = mx_strcat(tmp, "-");
-    mx_strdel(&tmp);
-    tmp = *str;
-    if ((file.st_mode & S_IXOTH) == S_IXOTH)
-        *str = mx_strcat(tmp, "x");
-    else
-        *str = mx_strcat(tmp, "-");
-    mx_strdel(&tmp);
-}
-
-char * mx_permissions(struct stat file) {
+char * mx_permissions(char *f) {
     char * permissions = mx_strnew(0);
+    struct stat file;
 
+    lstat(f, &file);
     type_of_file(file, &permissions);
-    owner_permissions(file, &permissions);
-    group_permissions(file, &permissions);
-    other_permissions(file, &permissions);
+    mx_owner_permissions(file, &permissions);
+    mx_group_permissions(file, &permissions);
+    mx_other_permissions(file, &permissions);
+    mx_attr_or_acl(f, &permissions);
     return permissions;
 }
