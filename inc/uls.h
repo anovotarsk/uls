@@ -46,7 +46,8 @@ char **mx_check_arguments(t_dirs *list, t_flags *flags);
 int mx_arr_size(char **arr);
 char **mx_arr_of_files(char **argv);
 void mx_start_printing(char **argv, t_flags *flags);
-void mx_ulsprint(char **files);
+void mx_ulsprint(char **files, t_flags *flags);
+int mx_max_strlen(char **arr);
 void mx_uls_chose_flag(char **arr, t_flags *flags);
 int mx_bubble_sort_r(char **arr, int size);
 void mx_flag_sort(char **arr, t_flags *flags);
@@ -59,8 +60,19 @@ char *mx_owner_name(struct stat file);
 char *mx_group_name(struct stat file);
 char *mx_file_size(struct stat file);
 void mx_attr_or_acl(char *file, char **permissions);
-char *mx_time(struct stat file);
+char *mx_time(struct stat file, t_flags *flags);
 char *mx_link(char *file);
+////////////////////////////////////////////////////////////
+void mx_chek_for_l(t_flags *flags, char **files);
+void mx_add_permissions(char **mas_for_print, int count_of_row, char **files);
+void mx_add_count_link(char **mas_for_print, int count_of_row, char **files);
+void mx_add_ownew_name(char **mas_for_print, int count_of_row, char **files);
+void mx_add_group_name(char **mas_for_print, int count_of_row, char **files);
+void mx_add_file_size(char **mas_for_print, int count_of_row, char **files);
+void mx_add_time(char **mas_for_print, int count_of_row, char **files, t_flags *flags);
+void mx_add_name(char **mas_for_print, int count_of_row, char **files);
+char *neded_space(char **files, char* file, int counter);
+////////////////////////////////////////////////////////////
 
 #endif
 
