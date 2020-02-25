@@ -63,14 +63,14 @@ void mx_attr_or_acl(char *file, char **permissions);
 char *mx_time(struct stat file, t_flags *flags);
 char *mx_link(char *file);
 ////////////////////////////////////////////////////////////
-void mx_chek_for_l(t_flags *flags, char **files);
+void mx_chek_for_l(t_flags *flags, char **files, bool chek, char *address);
 void mx_add_permissions(char **mas_for_print, int count_of_row, char **files);
 void mx_add_count_link(char **mas_for_print, int count_of_row, char **files);
 void mx_add_ownew_name(char **mas_for_print, int count_of_row, char **files);
 void mx_add_group_name(char **mas_for_print, int count_of_row, char **files);
 void mx_add_file_size(char **mas_for_print, int count_of_row, char **files);
 void mx_add_time(char **mas_for_print, int count_of_row, char **files, t_flags *flags);
-void mx_add_name(char **mas_for_print, int count_of_row, char **files);
+void mx_add_name(char **mas_for_print, int count_of_row, char **name, char **files);
 char *neded_space(char **files, char* file, int counter);
 ////////////////////////////////////////////////////////////
 

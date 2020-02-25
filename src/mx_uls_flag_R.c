@@ -17,7 +17,8 @@ static void mx_dir_or_error_R(char **dirs, int i, t_flags *flags, bool flag) {
         return;
     }
     files_in_dir = mx_dir_to_matrix(dirs[i], flags);
-    mx_ulsprint(files_in_dir, flags);
+    mx_chek_for_l(flags, files_in_dir, true, dirs[i]);
+    //mx_ulsprint(files_in_dir, flags);
     mx_del_strarr(&files_in_dir);
 }
 

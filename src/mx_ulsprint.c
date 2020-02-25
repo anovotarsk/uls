@@ -3,7 +3,7 @@
 static int window_size() { //Визначає розмір вікна
     struct winsize w;
 
-    ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
+    ioctl(1, 1074295912, &w);
     return w.ws_col;
 }
 

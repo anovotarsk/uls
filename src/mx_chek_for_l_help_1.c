@@ -9,7 +9,7 @@ void mx_add_permissions(char **mas_for_print, int count_of_row, char **files) {
     struct stat file;
 
     for (i = 0; i < count_of_row; i++) {
-        lstat(files[i], &file); 
+        lstat(files[i], &file);
         help_v = mx_permissions(files[i]);
         mas_for_print[i] = mx_strcat(help_v, " ");
         mx_strdel(&help_v);
@@ -73,7 +73,7 @@ void mx_add_ownew_name_help(char **mas_for_print, int count_of_row, char **help_
 
     for (i = 0; i < count_of_row; i++) {
         space = neded_space(help_arr, help_arr[i], count_of_row);
-        help_v1 = mx_strcat(space, help_arr[i]);
+        help_v1 = mx_strcat(help_arr[i], space);
         mx_strdel(&space);
         help_v2 = mx_strcat(help_v1, "  ");
         mx_strdel(&help_v1);

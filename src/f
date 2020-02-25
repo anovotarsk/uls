@@ -1,0 +1,18 @@
+21937c21937
+< -rw-------  1 anovotarsk  4242    158 Feb 25 23:23 cloudd_CC9277FA-0D42-55FA-9C35-B6EF43B99B57.plist
+---
+> -rw-------  1 anovotarsk  4242    158 Feb 25  2020 cloudd_CC9277FA-0D42-55FA-9C35-B6EF43B99B57.plist
+21952c21952
+< -rw-------  1 anovotarsk  4242    160 Feb 25 23:23 suggestd_CC9277FA-0D42-55FA-9C35-B6EF43B99B57.plist
+---
+> -rw-------  1 anovotarsk  4242    160 Feb 25  2020 suggestd_CC9277FA-0D42-55FA-9C35-B6EF43B99B57.plist
+36748c36748
+< total 11552
+---
+> total 11544
+36750,36751c36750,36751
+< -rw-r--r--  1 anovotarsk  4242  2883589 Feb 25 23:23 f1
+< -rw-r--r--  1 anovotarsk  4242  2885177 Feb 25 23:20 f2
+---
+> -rw-r--r--  1 anovotarsk  4242  2885507 Feb 25 23:23 f1
+> -rw-r--r--  1 anovotarsk  4242  2879488 Feb 25  2020 f2

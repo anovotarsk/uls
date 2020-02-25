@@ -38,15 +38,26 @@ void mx_add_time_help(char **mas_for_print, int count_of_row, char **help_arr) {
     return;
 }
 
-void mx_add_name(char **mas_for_print, int count_of_row, char **files) {
-    int i;
+void mx_add_name(char **mas_for_print, int count_of_row, char **name, char **files) {
+    char *link;
     char *help_v;
+    char *help_v_1;
 
-    for (i = 0; i < count_of_row; i++) {
-        help_v = mx_strcat(mas_for_print[i] ,files[i]);
-        mx_strdel(&mas_for_print[i]);
-        mas_for_print[i] = mx_strdup(help_v);
+    for (int i = 0; i < count_of_row; i++) {
+        link = mx_link(files[i]);
+        if (link != NULL) {
+            help_v = mx_strcat(name[i], link);
+            help_v_1 = mx_strcat(mas_for_print[i], help_v);
+            mx_strdel(&mas_for_print[i]);
+            mas_for_print[i] = help_v_1;
+        }
+        else {
+            help_v = mx_strcat(mas_for_print[i] ,name[i]);
+            mx_strdel(&mas_for_print[i]);
+            mas_for_print[i] = mx_strdup(help_v);
+        }
         mx_strdel(&help_v);
+        mx_strdel(&link);
     }
     return;
 }

@@ -20,11 +20,16 @@ static void add_hours(char **date, char *hours) {
 
 static void add_day(char **date, char *day) {
     char *tmp = *date;
+    char *day_tmp;
 
-    while (mx_strlen(day) < 2)
-        day = mx_strcat(" ", day);
+    day = mx_strdup(day);
+    while (mx_strlen(day) < 2) {
+        day_tmp = day;
+        day = mx_strcat(" ", day_tmp);
+        mx_strdel(&day_tmp);
+    }
     *date = mx_strcat(tmp, day);
-    //mx_strdel(&day);
+    mx_strdel(&day);
     mx_strdel(&tmp);
 }
 
@@ -44,6 +49,7 @@ char *mx_time(struct stat file, t_flags *flags) {
         date = mx_strcat(tmp, "  ");
         mx_strdel(&tmp);
         tmp = date;
+        date_arr[4][4] = '\0';
         date = mx_strcat(tmp, date_arr[4]);
         mx_strdel(&tmp);
     }
