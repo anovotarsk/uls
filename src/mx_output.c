@@ -26,7 +26,8 @@ void mx_dir_or_error(char **dirs, int i, t_flags *flags) {
     char *str;
     char **files_in_dir;
     
-    if ((mx_strcmp(dirs[0], ".") != 0 || dirs[1] != NULL) && mx_arr_size(dirs) > 1) {
+    if ((mx_strcmp(dirs[0], ".") != 0 || dirs[1] != NULL)
+        && mx_arr_size(dirs) > 1) {
         mx_printstr(dirs[i]);
         mx_printstr(":\n");
     }
@@ -38,7 +39,6 @@ void mx_dir_or_error(char **dirs, int i, t_flags *flags) {
     }
     files_in_dir = mx_dir_to_matrix(dirs[i], flags);
     mx_chek_for_l(flags, files_in_dir, true, dirs[i]);
-    //mx_ulsprint(files_in_dir, flags);
     mx_del_strarr(&files_in_dir);
 }
 
@@ -64,7 +64,6 @@ void mx_start_printing(char **argv, t_flags *flags) {
     bool was_out = false;
 
     mx_chek_for_l(flags, files, false, "") ;
-    //mx_ulsprint(files, flags);
     if (files[0] != NULL)
         was_out = true;
     if (mx_arr_size(files) == mx_arr_size(argv)) {

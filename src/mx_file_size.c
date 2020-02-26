@@ -35,7 +35,8 @@ char *mx_file_size(struct stat file) {
     char *tmp;
     char *minor;
 
-    if ((file.st_mode & S_IFMT)== S_IFCHR || (file.st_mode & S_IFMT) == S_IFBLK) {
+    if ((file.st_mode & MX_IFMT)== MX_IFCHR
+        || (file.st_mode & MX_IFMT) == MX_IFBLK) {
         tmp = mx_itoa((file.st_rdev >> 24) & 0xff);
         file_size = mx_strcat(tmp, ","); 
         mx_strdel(&tmp);

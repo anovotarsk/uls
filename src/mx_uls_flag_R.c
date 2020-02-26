@@ -18,7 +18,6 @@ static void mx_dir_or_error_R(char **dirs, int i, t_flags *flags, bool flag) {
     }
     files_in_dir = mx_dir_to_matrix(dirs[i], flags);
     mx_chek_for_l(flags, files_in_dir, true, dirs[i]);
-    //mx_ulsprint(files_in_dir, flags);
     mx_del_strarr(&files_in_dir);
 }
 
@@ -41,15 +40,14 @@ static char **out_and_new(char **argv, int i, t_flags *flags, bool flag) {
 }
 
 void mx_uls_flag_R(char **argv, t_flags *flags, bool f) {
-    int cheker;
     char **dir;
     struct stat file;
 
     for (int i = 0; i < mx_arr_size(argv); i++) {
-        cheker = mx_dirlen(argv[i]);
         lstat(argv[i], &file);
-        if ((S_IFLNK != (file.st_mode & S_IFMT) && mx_dirlen(argv[i]) != -1) || f == false) {
-            if (cheker != -2) {
+        if ((MX_IFLNK != (file.st_mode & MX_IFMT) && mx_dirlen(argv[i]) != -1)
+            || f == false) {
+            if (mx_dirlen(argv[i]) != -2) {
                 if (f)
                     mx_printchar('\n');
                 dir = out_and_new(argv, i, flags, f || mx_arr_size(argv) > 1);

@@ -3,19 +3,19 @@
 static void type_of_file(struct stat file, char **str) {
     char *tmp = *str;
 
-    if ((file.st_mode & S_IFMT) == S_IFSOCK)
+    if ((file.st_mode & MX_IFMT) == MX_IFSOCK)
         *str = mx_strcat(tmp, "s");
-    if ((file.st_mode & S_IFMT) == S_IFLNK)
+    if ((file.st_mode & MX_IFMT) == MX_IFLNK)
         *str = mx_strcat(tmp, "l");
-    if ((file.st_mode & S_IFMT) == S_IFREG)
+    if ((file.st_mode & MX_IFMT) == MX_IFREG)
         *str = mx_strcat(tmp, "-");
-    if ((file.st_mode & S_IFMT) == S_IFBLK)
+    if ((file.st_mode & MX_IFMT) == MX_IFBLK)
         *str = mx_strcat(tmp, "b");
-    if ((file.st_mode & S_IFMT) == S_IFDIR)
+    if ((file.st_mode & MX_IFMT) == MX_IFDIR)
         *str = mx_strcat(tmp, "d");
-    if ((file.st_mode & S_IFMT) == S_IFCHR)
+    if ((file.st_mode & MX_IFMT) == MX_IFCHR)
         *str = mx_strcat(tmp, "c");
-    if ((file.st_mode & S_IFMT) == S_IFIFO)
+    if ((file.st_mode & MX_IFMT) == MX_IFIFO)
         *str = mx_strcat(tmp, "p");
     mx_strdel(&tmp);
 }

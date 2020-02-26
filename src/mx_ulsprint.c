@@ -1,13 +1,13 @@
 #include "../inc/uls.h"
 
-static int window_size() { //Визначає розмір вікна
+static int window_size() {
     struct winsize w;
 
     ioctl(1, 1074295912, &w);
     return w.ws_col;
 }
 
-int mx_space_size(char **arr, int len) {//Визначає розмір необхідного пробілу 
+int mx_space_size(char **arr, int len) {
     int bigest = 0;
     int multiple_8 = 8;
     int i;
@@ -21,20 +21,18 @@ int mx_space_size(char **arr, int len) {//Визначає розмір необ
     return multiple_8;
 }
 
-static void for_print(char **arr, int row, int colom, int space_size) {//Допоміжна функця для форматованого виводу масиву
-    int i;
-    int j;
-    int f;
+static void for_print(char **arr, int row, int colom, int space_size) {
     int par = 0;
 
-    for (i = 0; i < colom; i++) {
+    for (int i = 0; i < colom; i++) {
         par = i;
-        for (j = 0; j < row && par < mx_arr_size(arr); j++) {
+        for (int j = 0; j < row && par < mx_arr_size(arr); j++) {
             mx_printstr(arr[par]);
             if (j + 1 != row && par + colom < mx_arr_size(arr)) {
                 if (mx_strlen(arr[par]) % 8 == 0)
                         space_size -= 8;
-                for (f = 0; f < ((space_size - mx_strlen(arr[par])) / 8) + 1; f++)
+                for (int f = 0;
+                     f < ((space_size - mx_strlen(arr[par])) / 8) + 1; f++)
                     mx_printchar('\t');
                 if (mx_strlen(arr[par]) % 8 == 0)
                         space_size += 8;
@@ -45,7 +43,7 @@ static void for_print(char **arr, int row, int colom, int space_size) {//Доп�
     }
 }
 
-static void mx_ulsprint_strarr(char **arr) {//Виводить форматовано масив 
+static void mx_ulsprint_strarr(char **arr) {
     int len_arr = 0;
     int output_count;
     int space_size = 0;
@@ -66,7 +64,7 @@ static void mx_ulsprint_strarr(char **arr) {//Виводить форматов�
     for_print(arr, output_count, colom, space_size);
 }
 
-void mx_ulsprint(char **files, t_flags *flags) { //Визначає чи є перехват вивода і виводить
+void mx_ulsprint(char **files, t_flags *flags) {
     if ((isatty(1) == 0 || mx_flag_search('1', flags))
         || mx_max_strlen(files) > window_size()) {
         mx_print_strarr(files, "\n");

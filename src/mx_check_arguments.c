@@ -40,7 +40,6 @@ static char **list_to_arr(t_dirs *list, t_flags *flags) {
     return arr;
 }
 
-//сортирует и выводит ошибку о несуществующем файле
 char **mx_check_arguments(t_dirs *list, t_flags *flags) {
     char *str;
     char **arr = list_to_arr(list, flags);
