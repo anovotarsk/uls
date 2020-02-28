@@ -14,3 +14,14 @@ void mx_uls_check_flags(t_flags *flags) {
         flags = flags->next; 
     }
 }
+
+bool mx_chek_for_p(t_flags *flags) {
+    bool cheker = false;
+
+    while (flags != NULL) {
+        if (flags->flag == 'l')
+            cheker = true;
+        flags = flags->next;
+    }
+    return cheker;
+}

@@ -1,15 +1,17 @@
 #include "../inc/uls.h"
 
+
 static void print_for_p(char **str, char **changed_str) {
     int i;
     char *help_v;
+    struct stat file;
 
     for (i = 0; i < mx_arr_size(str); i++) {
-        if ((mx_dirlen(changed_str[i]) >= 0)) {
+        lstat(changed_str[i], &file);
+        if ((file.st_mode & MX_IFMT) == MX_IFDIR) {
             help_v = mx_strcat(str[i], "/");
             mx_strdel(&str[i]);
-            str[i] = mx_strdup(help_v);
-            mx_strdel(&help_v);
+            str[i] = help_v;
         }
     }
 }

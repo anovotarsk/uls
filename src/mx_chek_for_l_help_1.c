@@ -14,12 +14,12 @@ void mx_add_count_link_help(char **mas_for_print, int count_of_row,
         help_v2 = mx_strcat(help_v1, " ");
         mx_strdel(&help_v1);
         help_v1 = mx_strcat(mas_for_print[i], help_v2);
-        mx_strdel(&mas_for_print[i]);
+        if (malloc_size(mas_for_print[i]) == 16)
+            mx_strdel(&mas_for_print[i]);
         mas_for_print[i] = mx_strdup(help_v1);
         mx_strdel(&help_v1);
         mx_strdel(&help_v2);
     }
-    mx_del_strarr(&links_arr);
     return;
 }
 
@@ -42,7 +42,6 @@ void mx_add_ownew_name_help(char **mas_for_print, int count_of_row,
         mx_strdel(&help_v1);
         mx_strdel(&help_v2);
     }
-    mx_del_strarr(&help_arr);
     return;
 }
 
@@ -59,6 +58,32 @@ void mx_add_permissions(char **mas_to_print, int count_of_row, char **files) {
     }
 }
 
+void mx_add_count_link_help_1(char **mas_for_print, int count_of_row,
+                            char **links_arr, char **files) {
+    int i;
+    char *space;
+    char *help_v1;
+    char *help_v2;
+    char *help_errore;
+
+    for (i = 0; i < count_of_row; i++) {
+        mx_printint(i);
+        mx_printstr("\n");
+        space = neded_space(links_arr, links_arr[i], count_of_row);
+        help_v1 = mx_strcat(space, links_arr[i]);
+        mx_strdel(&space);
+        help_v2 = mx_strcat(help_v1, " ");
+        mx_strdel(&help_v1);
+        help_errore = mx_strcat(mx_permissions(files[i]), help_v2);
+        //mx_strdel(&mas_for_print[i]);
+        mas_for_print[i] = help_errore;
+        mx_strdel(&help_v1);
+        mx_strdel(&help_v2);
+    }
+    mx_del_strarr(&links_arr);
+    return;
+}
+
 void mx_add_count_link(char **mas_for_print, int count_of_row, char **files) {
     int i;
     struct stat file;
@@ -69,7 +94,11 @@ void mx_add_count_link(char **mas_for_print, int count_of_row, char **files) {
         links_arr[i] = mx_count_links(file);
     }
     links_arr[count_of_row] = NULL;
-    mx_add_count_link_help(mas_for_print, count_of_row, links_arr);
+    // if (mx_strcmp(files[i], "//.PKInstallSandboxManager-SystemSoftware") == 0)
+    //     mx_add_count_link_help_1(mas_for_print, count_of_row, links_arr, files);
+    // else
+        mx_add_count_link_help(mas_for_print, count_of_row, links_arr);
+    mx_del_strarr(&links_arr);
     return;
 }
 
@@ -84,5 +113,6 @@ void mx_add_ownew_name(char **mas_for_print, int count_of_row, char **files) {
     }
     help_arr[count_of_row] = NULL;
     mx_add_ownew_name_help(mas_for_print, count_of_row, help_arr);
+    mx_del_strarr(&help_arr);
     return;
 }

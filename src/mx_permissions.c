@@ -30,5 +30,7 @@ char * mx_permissions(char *f) {
     mx_group_permissions(file, &permissions);
     mx_other_permissions(file, &permissions);
     mx_attr_or_acl(f, &permissions);
+    while (mx_strlen(permissions) != 11)
+        permissions = mx_permissions(f);
     return permissions;
 }

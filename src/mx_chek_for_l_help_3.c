@@ -19,7 +19,6 @@ void mx_add_time_help(char **mas_for_print, int count_of_row,
         mx_strdel(&help_v1);
         mx_strdel(&help_v2);
     }
-    mx_del_strarr(&help_arr);
     return;
 }
 
@@ -35,6 +34,7 @@ void mx_add_time(char **mas_for_print, int count_of_row,
     }
     help_arr[count_of_row] = NULL;
     mx_add_time_help(mas_for_print, count_of_row, help_arr);
+    mx_del_strarr(&help_arr);
     return;
 }
 

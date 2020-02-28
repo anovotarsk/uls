@@ -8,6 +8,6 @@ int main(int argc, char **argv) {
     mx_file_flag_list(argc, argv, &dirs, &flags);
     arr = mx_check_arguments(dirs, flags);
     mx_start_printing(arr, flags);
-    //system("leaks -q uls");
+    system("leaks -q uls");
     return 1;
 }

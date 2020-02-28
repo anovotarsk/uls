@@ -54,11 +54,7 @@ void mx_chek_for_l(t_flags *flags, char **files, bool chek, char *address) {
     char **changed_files;
     t_flags *f = flags;
 
-    while (f != NULL) {
-        if (f->flag == 'l')
-            cheker = true;
-        f = f->next;
-    }
+    cheker = mx_chek_for_p(f);
     if (cheker == true) {
         if (chek == true) {
             changed_files = files_with_adsress(files, address);
@@ -71,7 +67,7 @@ void mx_chek_for_l(t_flags *flags, char **files, bool chek, char *address) {
     else {
         changed_files = files_with_adsress(files, address);
         mx_p_flag_standart(files, flags, changed_files);
-        //mx_ulsprint(files, flags);
+        mx_del_strarr(&changed_files);
     }
 }
 

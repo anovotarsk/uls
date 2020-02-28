@@ -40,7 +40,7 @@ char *mx_file_size(struct stat file) {
         tmp = mx_itoa((file.st_rdev >> 24) & 0xff);
         file_size = mx_strcat(tmp, ","); 
         mx_strdel(&tmp);
-        add_spaces(&file_size, 5);
+        add_spaces(&file_size, 4);
         minor = find_minor(file);
         add_spaces(&minor, 4);
         tmp = file_size;
