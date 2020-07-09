@@ -112,5 +112,6 @@ void mx_p_flag_standart(char **str, t_flags *flags, char **changed_str);
 void mx_p_flag_for_l(char **str, t_flags *flags, char **changed_str);
 bool mx_chek_for_p(t_flags *flags);
 
+void unprint_symbols(char **arr);
 
 #endif

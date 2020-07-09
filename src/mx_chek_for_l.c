@@ -22,6 +22,7 @@ void mx_lprint(char **files, t_flags *flag, bool chek, char **files_name) {
         mx_printint(total_sum(files, count_of_row));
         mx_printstr("\n");
     }
+    unprint_symbols(files_name);
     mx_add_permissions(mass_for_print, count_of_row, files);
     mx_add_count_link(mass_for_print, count_of_row, files);
     mx_add_ownew_name(mass_for_print, count_of_row, files);
@@ -66,6 +67,7 @@ void mx_chek_for_l(t_flags *flags, char **files, bool chek, char *address) {
     }
     else {
         changed_files = files_with_adsress(files, address);
+        unprint_symbols(files);
         mx_p_flag_standart(files, flags, changed_files);
         mx_del_strarr(&changed_files);
     }

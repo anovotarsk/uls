@@ -18,11 +18,12 @@ static void print_for_p(char **str, char **changed_str) {
 
 void mx_p_flag_standart(char **str, t_flags *flags, char **changed_str) {
     bool cheker = false;
+    t_flags *flg = flags;
 
-    while (flags != NULL) {
-        if (flags->flag == 'p')
+    while (flg != NULL) {
+        if (flg->flag == 'p')
             cheker = true;
-        flags = flags->next;
+        flg = flg->next;
     }
     if (cheker) {
         print_for_p(str ,changed_str);

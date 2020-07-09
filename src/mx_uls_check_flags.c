@@ -17,11 +17,12 @@ void mx_uls_check_flags(t_flags *flags) {
 
 bool mx_chek_for_p(t_flags *flags) {
     bool cheker = false;
+    t_flags *f = flags;
 
-    while (flags != NULL) {
-        if (flags->flag == 'l')
+    while (f != NULL) {
+        if (f->flag == 'l')
             cheker = true;
-        flags = flags->next;
+        f = f->next;
     }
     return cheker;
 }

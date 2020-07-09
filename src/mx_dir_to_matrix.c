@@ -23,16 +23,18 @@ void mx_flag_sort(char **arr, t_flags *flags) {
         mx_bubble_sort(arr, mx_arr_size(arr));
 }
 
-static void unprint_symbols(char **arr) {
+void unprint_symbols(char **arr) {
     int i = 0;
     int j;
 
-    while (arr[i] != NULL) {
-        for (j = 0; j < mx_strlen(arr[i]); j++) {
-            if (arr[i][j] > 0 && arr[i][j] < 32)
-                arr[i][j] = '?';
+    if (isatty(1) != 0) {
+        while (arr[i] != NULL) {
+            for (j = 0; j < mx_strlen(arr[i]); j++) {
+                if (arr[i][j] > 0 && arr[i][j] < 32)
+                    arr[i][j] = '?';
+            }
+            i++;
         }
-        i++;
     }
 }
 
@@ -54,7 +56,6 @@ char **mx_dir_to_matrix(char *dir, t_flags *flags) {
     }
     arr[i] = NULL;
     closedir(dd);
-    unprint_symbols(arr);
     mx_flag_sort(arr, flags);
     return arr;
 }

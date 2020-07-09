@@ -1,4 +1,4 @@
-#include "../inc/uls.h"
+#include "../inc/uls.h"  
 
 static void S_x_s(struct stat file, char **str) {
     char *tmp;

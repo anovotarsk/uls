@@ -49,10 +49,12 @@ void mx_push_flag(t_flags **list, char data) {
 }
 
 bool mx_flag_search(char f, t_flags *flags) {
-    while (flags != NULL) {
-        if (f == flags->flag)
+    t_flags *f1 = flags;
+
+    while (f1 != NULL) {
+        if (f == f1->flag)
             return true;
-        flags = flags->next;
+        f1 = f1->next;
     }
     return false;
 }
